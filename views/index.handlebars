@@ -3,30 +3,67 @@
 <h2>Burgers to Eat</h2>
 
 <ul>
-  {{#each burgers}}
-    {{#unless devoured}}
-      {{> burger-block devoured=true}}
-    {{/unless}}
-  {{/each}}
+	{{#each burgers}}
+		{{#unless devoured}}
+			{{> burger-block devoured=true}}
+		{{/unless}}
+	{{/each}}
 </ul>
 
 <h2>Devoured Burgers</h2>
 
 <ul>
-  {{#each burgers}}
-    {{#if devoured}}
-      {{> burger-block devoured=true}}
-    {{/if}}
-  {{/each}}
+	{{#each burgers}}
+		{{#if devoured}}
+			{{> devoured-block devoured=true}}
+		{{/if}}
+	{{/each}}
 </ul>
 
 <h2>Add a Burger</h2>
 <form class="create-form">
 
-  <div class="form-group">
-    <label for="burger-name">Burger Name:</label>
-    <input type="text" id="burger-name" name="name">
-  </div>
+	<div class="form-group">
+		<label for="burger-name">Burger Name:</label>
+		<input type="text" id="burger-name" name="name">
+	</div>
 
-  <button type="submit">Add Burger</button>
+	<button type="submit">Add Burger</button>
 </form>
+
+
+<script>
+	$(function(){
+		$(".devour-burger").on("click", function(){
+			
+			var id = $(this).data("id");
+			
+			$.ajax("api/burgers/" + id, {
+				type: "PUT"
+			}).then(
+				function(){
+					console.log("Devoured burger with the id " + id);
+					location.reload();
+				}
+			);
+
+		});
+
+		$(".create-form").on("submit", function(e){
+			e.preventDefault();
+
+			var name = $("#burger-name").val().trim();
+
+			$.ajax("api/burgers", {
+				type: "POST",
+				data: {name: name}
+			}).then(
+				function(){
+					console.log("Added " + name + " burger!");
+					location.reload();
+				}
+			);
+		});
+	});
+	
+</script>
