@@ -1,0 +1,23 @@
+body{
+    background-image: url('/assets/images/vintage-leaves.png');
+}
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    margin: 15px;
+}
+
+.devour-burger{
+    margin-left: 15px;
+}
+
+.menu{
+    border: solid 2px black;
+    border-radius: 25px;
+    margin: 25px;
+    padding: 25px;
+    background-color: #bfc4d1;
+}
