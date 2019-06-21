@@ -6,6 +6,10 @@ ul{
     list-style-type: none;
 }
 
+#burger-pic{
+    height: 150px;
+}
+
 li{
     margin: 15px;
 }
